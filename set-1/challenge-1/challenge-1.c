@@ -1,12 +1,13 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 #define OK       0
 #define NO_INPUT 1
 #define TOO_LONG 2
 // Learning stdin and stdout
 // https://stackoverflow.com/questions/4023895/how-do-i-read-a-string-entered-by-the-user-in-c
-static int getLine (char *prmpt, char*buff, size_t sz) {
+static int getLine (char *prmpt, char *buff, size_t sz) {
     int ch, extra;
 
     // Get line with buffer overrun protection.
@@ -16,7 +17,7 @@ static int getLine (char *prmpt, char*buff, size_t sz) {
     }
 
     if (fgets(buff, sz, stdin) == NULL)
-    return NO_INPUT;
+        return NO_INPUT;
   
     // If it was too long, there'll be no newline. In that case, we flush
     // to end of line so that excess doesn't affect the next call.
@@ -24,7 +25,7 @@ static int getLine (char *prmpt, char*buff, size_t sz) {
         extra = 0;
         while (((ch = getchar()) != '\n') && (ch != EOF))
             extra = 1;
-    return (extra == 1) ? TOO_LONG : OK;
+        return (extra == 1) ? TOO_LONG : OK;
     }
 
     // Otherwise remove newline and give string back to caller.
@@ -51,6 +52,11 @@ int main(void) {
     }
     
     printf("OK [%s]\n", buff);
+    
+    // Turning a base 16 string into a base 10 integer
+    // https://stackoverflow.com/questions/10156409/convert-hex-string-char-to-int
+    int number = (int)strtol(buff, NULL, 16);
+    printf("My number is %d", number);
 
     return 0;
 }
