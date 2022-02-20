@@ -34,7 +34,7 @@ static int getLine (char *prmpt, char *buff, size_t sz) {
 }
 
 // Test program for getLine()
-
+// https://codereview.stackexchange.com/questions/227690/convert-a-hex-string-to-base64
 int main(void) {
     int rc;
     char buff[128];
